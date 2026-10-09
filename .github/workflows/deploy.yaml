@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:       # <-- THIS IS REQUIRED FOR PRs
+      branches:
+        - main
 
 jobs:
   test:
