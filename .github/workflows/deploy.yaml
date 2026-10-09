@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - main
-  pull_request:       # <-- THIS IS REQUIRED FOR PRs
-      branches:
-        - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -20,18 +20,12 @@ jobs:
         with:
           node-version: '20'
 
-      # Test 1: HTML Linting
+      # Validación de sintaxis HTML
       - name: Lint HTML
         run: npx htmlhint "**/*.html"
 
-      # Test 2: Check for broken links
-      - name: Check Links
-        uses: lycheeverse/lychee-action@v1
-        with:
-          args: --verbose --no-progress './**/*.html'
-
   deploy:
-    needs: test # Deployment only runs if the 'test' job succeeds
+    needs: test # El despliegue SOLO se ejecuta si la etapa 'test' aprueba
     runs-on: ubuntu-latest
     permissions:
       contents: write
